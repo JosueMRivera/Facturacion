@@ -40,6 +40,30 @@ namespace Vista
             }
             errorProvider1.Clear();
 
+            //Validar en la base de datos
+
+
+
+            //Mostramos el menu
+
+            Menu menuformulario = new Menu();
+            this.Hide();
+            menuformulario.Show();
+
+
+
+        }
+
+        private void mostrarcontraseñabt_Click(object sender, EventArgs e)
+        {
+            if (Contraseñatxt.PasswordChar == '*')
+            {
+                Contraseñatxt.PasswordChar = '\0';
+            }
+            else
+            {
+                Contraseñatxt.PasswordChar = '*';
+            }
         }
     }
 }
