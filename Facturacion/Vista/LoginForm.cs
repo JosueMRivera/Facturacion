@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Datos;
+using Entidades;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,9 +12,9 @@ using System.Windows.Forms;
 
 namespace Vista
 {
-    public partial class Login : Form
+    public partial class LoginForm : Form
     {
-        public Login()
+        public LoginForm()
         {
             InitializeComponent();
         }
@@ -42,6 +44,9 @@ namespace Vista
 
             //Validar en la base de datos
 
+            Login login = new Login(Usuariotxt.Text, Contraseñatxt.Text);
+            Usuario usuario = new Usuario();
+            UsuarioDB usuarioDB = new UsuarioDB();
 
 
             //Mostramos el menu
