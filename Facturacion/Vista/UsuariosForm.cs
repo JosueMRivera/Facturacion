@@ -24,6 +24,7 @@ namespace Vista
             Adjuntarbt.Enabled = true;
             guardarbt.Enabled = true;
             Cancelarbt.Enabled = true;
+            Nuevobt.Enabled = false;
         }
 
         private void DeshabilitarControles()
@@ -37,6 +38,7 @@ namespace Vista
             Adjuntarbt.Enabled = false;
             guardarbt.Enabled = false;
             Cancelarbt.Enabled = false;
+            Nuevobt.Enabled = true;
         }
 
         private void LimpiarControles()
@@ -45,7 +47,7 @@ namespace Vista
             Nombretxt.Clear();
             passwordtxt.Clear();
             correotxt.Clear();
-            RolCB.Items.Clear();
+            RolCB.Text = "";
             EstaActivocheckBox.Checked = false;
             FotoPB.Image = null;
         }
