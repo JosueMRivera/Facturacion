@@ -145,5 +145,14 @@
   <ItemGroup>
     <None Include="Resources\Ventas.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\buscar imagen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entidades\Entidades.csproj">
+      <Project>{62543E81-23BF-449F-815C-4D1FADBBD869}</Project>
+      <Name>Entidades</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
