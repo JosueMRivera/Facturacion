@@ -1,5 +1,7 @@
-﻿using Entidades;
+﻿using Datos;
+using Entidades;
 using System;
+using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -13,6 +15,11 @@ namespace Vista
         }
         string tipoOperacion;
 
+        DataTable dt = new DataTable();
+        UsuarioDB UsuarioDB = new UsuarioDB();
+
+        Usuario user = new Usuario();
+
         private void HabilitarControles()
         {
             Codigotxt.Enabled = true;
@@ -25,6 +32,7 @@ namespace Vista
             guardarbt.Enabled = true;
             Cancelarbt.Enabled = true;
             Nuevobt.Enabled = false;
+            Modificarbt.Enabled = false;
         }
 
         private void DeshabilitarControles()
@@ -39,6 +47,7 @@ namespace Vista
             guardarbt.Enabled = false;
             Cancelarbt.Enabled = false;
             Nuevobt.Enabled = true;
+            Modificarbt.Enabled = true;
         }
 
         private void LimpiarControles()
@@ -110,8 +119,6 @@ namespace Vista
                 }
                 errorProvider1.Clear();
 
-                Usuario user = new Usuario();
-
                 user.CodigoUsuario = Codigotxt.Text;
                 user.Nombre = Nombretxt.Text;
                 user.Contraseña = passwordtxt.Text;
@@ -128,6 +135,20 @@ namespace Vista
 
                 //Insertar en la base de datos
 
+                bool inserto = UsuarioDB.Insertar(user);
+
+                if (inserto)
+                {
+                    LimpiarControles();
+                    DeshabilitarControles();
+                    TraerUsuarios();
+                    MessageBox.Show("Registro guardado");
+                    
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo guardar el registro");
+                }
 
 
             }
@@ -153,5 +174,17 @@ namespace Vista
             }
 
         }
+
+        private void UsuariosForm_Load(object sender, EventArgs e)
+        {
+            TraerUsuarios();
+        }
+
+        private void TraerUsuarios()
+        {
+            dt = UsuarioDB.DevolverUsuarios();
+            UsuariosDGV.DataSource = dt;
+        }
+
     }
 }

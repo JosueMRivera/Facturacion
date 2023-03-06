@@ -204,7 +204,6 @@ namespace Vista
             // Modificarbt
             // 
             this.Modificarbt.BackColor = System.Drawing.Color.White;
-            this.Modificarbt.Enabled = false;
             this.Modificarbt.Location = new System.Drawing.Point(194, 244);
             this.Modificarbt.Name = "Modificarbt";
             this.Modificarbt.Size = new System.Drawing.Size(80, 30);
@@ -250,8 +249,9 @@ namespace Vista
             // 
             // UsuariosDGV
             // 
+            this.UsuariosDGV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.UsuariosDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.UsuariosDGV.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.UsuariosDGV.Location = new System.Drawing.Point(0, 280);
             this.UsuariosDGV.Name = "UsuariosDGV";
             this.UsuariosDGV.Size = new System.Drawing.Size(669, 198);
@@ -304,6 +304,7 @@ namespace Vista
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UsuariosForm";
             this.Text = "Usuarios";
+            this.Load += new System.EventHandler(this.UsuariosForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.FotoPB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.UsuariosDGV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();

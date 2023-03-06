@@ -40,9 +40,9 @@ namespace Datos
                             user.Contraseña = dr["Password"].ToString();
                             user.Correo = dr["Correo"].ToString();
                             user.Rol = dr["Rol"].ToString();
-                            user.Foto = (byte[])(dr["Foto"]);
                             user.FechaCreacion = (DateTime)(dr["FechaCreacion"]);
-                            user.EstaActivo = (Boolean)(dr["EstadoActivo"]);
+                            user.EstaActivo = Convert.ToBoolean(dr["EstadoActivo"]);
+                            user.Foto = (byte[])(dr["Foto"]);
                         }
 
                     }
@@ -54,6 +54,133 @@ namespace Datos
             }
 
             return user;
+        }
+
+        public bool Insertar(Usuario user)
+        {
+            bool inserto = false;
+            try
+            {
+                StringBuilder sql = new StringBuilder();
+                sql.Append("INSERT INTO usuario VALUES");
+                sql.Append(" (@CodigoUsuario, @Nombre, @Password, @Correo, @Rol, @Foto, @FechaCreacion, @EstadoActivo); ");
+
+                using (MySqlConnection _Conexion = new MySqlConnection(cadena))
+                {
+                    _Conexion.Open();
+                    using (MySqlCommand comando = new MySqlCommand(sql.ToString(), _Conexion))
+                    {
+                        comando.CommandType = CommandType.Text;
+                        comando.Parameters.Add("@CodigoUsuario", MySqlDbType.VarChar, 50).Value = user.CodigoUsuario;
+                        comando.Parameters.Add("@Nombre", MySqlDbType.VarChar, 50).Value = user.Nombre;
+                        comando.Parameters.Add("@Password", MySqlDbType.VarChar, 80).Value = user.Contraseña;
+                        comando.Parameters.Add("@Correo", MySqlDbType.VarChar, 45).Value = user.Correo;
+                        comando.Parameters.Add("@Rol", MySqlDbType.VarChar, 20).Value = user.Rol;
+                        comando.Parameters.Add("@Foto", MySqlDbType.LongBlob).Value = user.Foto;
+                        comando.Parameters.Add("@FechaCreacion", MySqlDbType.DateTime).Value = user.FechaCreacion;
+                        comando.Parameters.Add("@EstadoActivo", MySqlDbType.Bit).Value = user.EstaActivo;
+                        comando.ExecuteNonQuery();
+                        inserto = true;
+
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+            }
+
+            return inserto;
+        }
+
+        public bool Editar(Usuario user)
+        {
+            bool Edito = false;
+            try
+            {
+                StringBuilder sql = new StringBuilder();
+                sql.Append("UPDATE usuario SET ");
+                sql.Append(" Nombre = @Nombre, Password = @Password, Correo = @Correo, Rol = @Rol, @Foto, EstadoActivo = @EstadoActivo ");
+                sql.Append(" WHERE CodigoUsuario = @CodigoUsuario; ");
+
+                using (MySqlConnection _Conexion = new MySqlConnection(cadena))
+                {
+                    _Conexion.Open();
+                    using (MySqlCommand comando = new MySqlCommand(sql.ToString(), _Conexion))
+                    {
+                        comando.CommandType = CommandType.Text;
+                        comando.Parameters.Add("@CodigoUsuario", MySqlDbType.VarChar, 50).Value = user.CodigoUsuario;
+                        comando.Parameters.Add("@Nombre", MySqlDbType.VarChar, 50).Value = user.Nombre;
+                        comando.Parameters.Add("@Password", MySqlDbType.VarChar, 80).Value = user.Contraseña;
+                        comando.Parameters.Add("@Correo", MySqlDbType.VarChar, 45).Value = user.Correo;
+                        comando.Parameters.Add("@Rol", MySqlDbType.VarChar, 20).Value = user.Rol;
+                        comando.Parameters.Add("@Foto", MySqlDbType.LongBlob).Value = user.Foto;
+                        comando.Parameters.Add("@FechaCreacion", MySqlDbType.DateTime).Value = user.FechaCreacion;
+                        comando.Parameters.Add("@EstadoActivo", MySqlDbType.Bit).Value = user.EstaActivo;
+                        comando.ExecuteNonQuery();
+                        Edito = true;
+
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+            }
+
+            return Edito;
+        }
+
+        public bool Eliminar(string codigoUsuario)
+        {
+            bool Elimino = false;
+            try
+            {
+                StringBuilder sql = new StringBuilder();
+                sql.Append("DELETE FROM usuario ");
+                sql.Append(" WHERE CodigoUsuario = @CodigoUsuario; ");
+
+                using (MySqlConnection _Conexion = new MySqlConnection(cadena))
+                {
+                    _Conexion.Open();
+                    using (MySqlCommand comando = new MySqlCommand(sql.ToString(), _Conexion))
+                    {
+                        comando.CommandType = CommandType.Text;
+                        comando.Parameters.Add("@CodigoUsuario", MySqlDbType.VarChar, 50).Value = codigoUsuario;
+                        comando.ExecuteNonQuery();
+                        Elimino = true;
+
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+            }
+
+            return Elimino;
+        }
+
+        public DataTable DevolverUsuarios()
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                StringBuilder sql = new StringBuilder();
+                sql.Append("SELECT * FROM usuario ");
+                using (MySqlConnection _Conexion = new MySqlConnection(cadena))
+                {
+                    _Conexion.Open();
+                    using (MySqlCommand comando = new MySqlCommand(sql.ToString(), _Conexion))
+                    {
+                        comando.CommandType = CommandType.Text;
+                        MySqlDataReader dr = comando.ExecuteReader();
+                        dt.Load(dr);
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+            }
+
+            return dt;
         }
 
     }

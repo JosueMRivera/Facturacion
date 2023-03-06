@@ -1,13 +1,6 @@
 ﻿using Datos;
 using Entidades;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Vista
@@ -48,14 +41,28 @@ namespace Vista
             Usuario usuario = new Usuario();
             UsuarioDB usuarioDB = new UsuarioDB();
 
+            usuario = usuarioDB.Autenticar(login);
 
-            //Mostramos el menu
+            if (usuario != null)
+            {
+                if (usuario.EstaActivo)
+                {
+                    //Mostramos el menu
 
-            Menu menuformulario = new Menu();
-            this.Hide();
-            menuformulario.Show();
-
-
+                    Menu menuformulario = new Menu();
+                    this.Hide();
+                    menuformulario.Show();
+                }
+                else
+                {
+                    MessageBox.Show("El usuario no esta activo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
+            }
+            else
+            {
+                MessageBox.Show("Datos de usuario incorrectos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
