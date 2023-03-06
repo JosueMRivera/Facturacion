@@ -42,7 +42,11 @@ namespace Datos
                             user.Rol = dr["Rol"].ToString();
                             user.FechaCreacion = (DateTime)(dr["FechaCreacion"]);
                             user.EstaActivo = Convert.ToBoolean(dr["EstadoActivo"]);
-                            user.Foto = (byte[])(dr["Foto"]);
+                            if (dr["Foto"].GetType() != typeof(DBNull))
+                            {
+                                user.Foto = (byte[])(dr["Foto"]);
+                            }
+                            
                         }
 
                     }
@@ -99,7 +103,7 @@ namespace Datos
             {
                 StringBuilder sql = new StringBuilder();
                 sql.Append("UPDATE usuario SET ");
-                sql.Append(" Nombre = @Nombre, Password = @Password, Correo = @Correo, Rol = @Rol, @Foto, EstadoActivo = @EstadoActivo ");
+                sql.Append(" Nombre = @Nombre, Password = @Password, Correo = @Correo, Rol = @Rol, Foto = @Foto, EstadoActivo = @EstadoActivo ");
                 sql.Append(" WHERE CodigoUsuario = @CodigoUsuario; ");
 
                 using (MySqlConnection _Conexion = new MySqlConnection(cadena))
@@ -114,7 +118,6 @@ namespace Datos
                         comando.Parameters.Add("@Correo", MySqlDbType.VarChar, 45).Value = user.Correo;
                         comando.Parameters.Add("@Rol", MySqlDbType.VarChar, 20).Value = user.Rol;
                         comando.Parameters.Add("@Foto", MySqlDbType.LongBlob).Value = user.Foto;
-                        comando.Parameters.Add("@FechaCreacion", MySqlDbType.DateTime).Value = user.FechaCreacion;
                         comando.Parameters.Add("@EstadoActivo", MySqlDbType.Bit).Value = user.EstaActivo;
                         comando.ExecuteNonQuery();
                         Edito = true;
@@ -181,6 +184,35 @@ namespace Datos
             }
 
             return dt;
+        }
+
+        public byte[] DevolverFoto(string codigoUsuario)
+        {
+            byte[] foto = new byte[0];
+            try
+            {
+                StringBuilder sql = new StringBuilder();
+                sql.Append("SELECT Foto FROM usuario WHERE CodigoUsuario = @CodigoUsuario");
+                using (MySqlConnection _Conexion = new MySqlConnection(cadena))
+                {
+                    _Conexion.Open();
+                    using (MySqlCommand comando = new MySqlCommand(sql.ToString(), _Conexion))
+                    {
+                        comando.CommandType = CommandType.Text;
+                        comando.Parameters.Add("@CodigoUsuario", MySqlDbType.VarChar, 50).Value = codigoUsuario;
+                        MySqlDataReader dr = comando.ExecuteReader();
+                        if (dr.Read())
+                        {
+                            foto = (byte[])dr["Foto"];
+                        }
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+            }
+            return foto;
+
         }
 
     }

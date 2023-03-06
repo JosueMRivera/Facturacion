@@ -3,6 +3,7 @@ using Entidades;
 using System;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Vista
@@ -154,6 +155,32 @@ namespace Vista
             }
             else if (tipoOperacion == "Modificar")
             {
+                user.CodigoUsuario = Codigotxt.Text;
+                user.Nombre = Nombretxt.Text;
+                user.Contraseña = passwordtxt.Text;
+                user.Rol = RolCB.Text;
+                user.Correo = correotxt.Text;
+                user.EstaActivo = EstaActivocheckBox.Checked;
+
+                if (FotoPB.Image != null)
+                {
+                    System.IO.MemoryStream ms = new System.IO.MemoryStream();
+                    FotoPB.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    user.Foto = ms.GetBuffer();
+                }
+
+                bool modifico = UsuarioDB.Editar(user);
+                if (modifico)
+                {
+                    LimpiarControles();
+                    DeshabilitarControles();
+                    TraerUsuarios();
+                    MessageBox.Show("Registro actualizado correctamente");
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo actualizar el registro");
+                }
 
             }
         }
@@ -161,6 +188,28 @@ namespace Vista
         private void Modificarbt_Click(object sender, EventArgs e)
         {
             tipoOperacion = "Modificar";
+            if (UsuariosDGV.SelectedRows.Count > 0)
+            {
+                Codigotxt.Text = UsuariosDGV.CurrentRow.Cells["CodigoUsuario"].Value.ToString();
+                Nombretxt.Text = UsuariosDGV.CurrentRow.Cells["Nombre"].Value.ToString();
+                passwordtxt.Text = UsuariosDGV.CurrentRow.Cells["Password"].Value.ToString();
+                correotxt.Text = UsuariosDGV.CurrentRow.Cells["Correo"].Value.ToString();
+                RolCB.Text = UsuariosDGV.CurrentRow.Cells["Rol"].Value.ToString();
+                EstaActivocheckBox.Checked = Convert.ToBoolean(UsuariosDGV.CurrentRow.Cells["EstadoActivo"].Value);
+
+                byte[] miFoto = UsuarioDB.DevolverFoto(Codigotxt.Text = UsuariosDGV.CurrentRow.Cells["CodigoUsuario"].Value.ToString());
+                if (miFoto.Length > 0)
+                {
+                    MemoryStream ms = new MemoryStream(miFoto);
+                    FotoPB.Image = System.Drawing.Bitmap.FromStream(ms);
+                }
+
+                HabilitarControles();
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un registro");
+            }
         }
 
         private void Adjuntarbt_Click(object sender, EventArgs e)
@@ -186,5 +235,33 @@ namespace Vista
             UsuariosDGV.DataSource = dt;
         }
 
+        private void Eliminarbt_Click(object sender, EventArgs e)
+        {
+            if (UsuariosDGV.SelectedRows.Count > 0)
+            {
+
+                DialogResult resultado = MessageBox.Show("Esta seguro de eliminar el registro", "Advertencia", MessageBoxButtons.YesNo);
+                if (resultado == DialogResult.Yes)
+                {
+                    bool elimino = UsuarioDB.Eliminar(UsuariosDGV.CurrentRow.Cells["CodigoUsuario"].Value.ToString());
+
+                    if (elimino)
+                    {
+                        LimpiarControles();
+                        DeshabilitarControles();
+                        TraerUsuarios();
+                        MessageBox.Show("Registro eliminado");
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo eliminar el registro");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un registro");
+            }
+        }
     }
 }

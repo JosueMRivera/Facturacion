@@ -227,13 +227,13 @@ namespace Vista
             // Eliminarbt
             // 
             this.Eliminarbt.BackColor = System.Drawing.Color.White;
-            this.Eliminarbt.Enabled = false;
             this.Eliminarbt.Location = new System.Drawing.Point(366, 244);
             this.Eliminarbt.Name = "Eliminarbt";
             this.Eliminarbt.Size = new System.Drawing.Size(80, 30);
             this.Eliminarbt.TabIndex = 17;
             this.Eliminarbt.Text = "Eliminar";
             this.Eliminarbt.UseVisualStyleBackColor = false;
+            this.Eliminarbt.Click += new System.EventHandler(this.Eliminarbt_Click);
             // 
             // Cancelarbt
             // 
