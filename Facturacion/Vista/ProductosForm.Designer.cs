@@ -47,6 +47,8 @@ namespace Vista
             this.Nuevobt = new System.Windows.Forms.Button();
             this.ProductosDGV = new System.Windows.Forms.DataGridView();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.EstaActivocheckBox = new System.Windows.Forms.CheckBox();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ImagenPB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProductosDGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -149,7 +151,7 @@ namespace Vista
             // 
             this.Cancelarbt.BackColor = System.Drawing.Color.White;
             this.Cancelarbt.Enabled = false;
-            this.Cancelarbt.Location = new System.Drawing.Point(460, 181);
+            this.Cancelarbt.Location = new System.Drawing.Point(465, 206);
             this.Cancelarbt.Name = "Cancelarbt";
             this.Cancelarbt.Size = new System.Drawing.Size(80, 30);
             this.Cancelarbt.TabIndex = 23;
@@ -160,19 +162,19 @@ namespace Vista
             // Eliminarbt
             // 
             this.Eliminarbt.BackColor = System.Drawing.Color.White;
-            this.Eliminarbt.Enabled = false;
-            this.Eliminarbt.Location = new System.Drawing.Point(374, 181);
+            this.Eliminarbt.Location = new System.Drawing.Point(379, 206);
             this.Eliminarbt.Name = "Eliminarbt";
             this.Eliminarbt.Size = new System.Drawing.Size(80, 30);
             this.Eliminarbt.TabIndex = 22;
             this.Eliminarbt.Text = "Eliminar";
             this.Eliminarbt.UseVisualStyleBackColor = false;
+            this.Eliminarbt.Click += new System.EventHandler(this.Eliminarbt_Click);
             // 
             // guardarbt
             // 
             this.guardarbt.BackColor = System.Drawing.Color.White;
             this.guardarbt.Enabled = false;
-            this.guardarbt.Location = new System.Drawing.Point(288, 181);
+            this.guardarbt.Location = new System.Drawing.Point(293, 206);
             this.guardarbt.Name = "guardarbt";
             this.guardarbt.Size = new System.Drawing.Size(80, 30);
             this.guardarbt.TabIndex = 21;
@@ -183,8 +185,7 @@ namespace Vista
             // Modificarbt
             // 
             this.Modificarbt.BackColor = System.Drawing.Color.White;
-            this.Modificarbt.Enabled = false;
-            this.Modificarbt.Location = new System.Drawing.Point(202, 181);
+            this.Modificarbt.Location = new System.Drawing.Point(207, 206);
             this.Modificarbt.Name = "Modificarbt";
             this.Modificarbt.Size = new System.Drawing.Size(80, 30);
             this.Modificarbt.TabIndex = 20;
@@ -195,7 +196,7 @@ namespace Vista
             // Nuevobt
             // 
             this.Nuevobt.BackColor = System.Drawing.Color.White;
-            this.Nuevobt.Location = new System.Drawing.Point(116, 181);
+            this.Nuevobt.Location = new System.Drawing.Point(121, 206);
             this.Nuevobt.Name = "Nuevobt";
             this.Nuevobt.Size = new System.Drawing.Size(80, 30);
             this.Nuevobt.TabIndex = 19;
@@ -207,7 +208,7 @@ namespace Vista
             // 
             this.ProductosDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ProductosDGV.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ProductosDGV.Location = new System.Drawing.Point(0, 217);
+            this.ProductosDGV.Location = new System.Drawing.Point(0, 242);
             this.ProductosDGV.Name = "ProductosDGV";
             this.ProductosDGV.Size = new System.Drawing.Size(686, 166);
             this.ProductosDGV.TabIndex = 24;
@@ -216,11 +217,32 @@ namespace Vista
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // EstaActivocheckBox
+            // 
+            this.EstaActivocheckBox.AutoSize = true;
+            this.EstaActivocheckBox.Enabled = false;
+            this.EstaActivocheckBox.Location = new System.Drawing.Point(121, 171);
+            this.EstaActivocheckBox.Name = "EstaActivocheckBox";
+            this.EstaActivocheckBox.Size = new System.Drawing.Size(15, 14);
+            this.EstaActivocheckBox.TabIndex = 26;
+            this.EstaActivocheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(27, 169);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(78, 16);
+            this.label6.TabIndex = 25;
+            this.label6.Text = "Esta Activo:";
+            // 
             // ProductosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(686, 383);
+            this.ClientSize = new System.Drawing.Size(686, 408);
+            this.Controls.Add(this.EstaActivocheckBox);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.ProductosDGV);
             this.Controls.Add(this.Cancelarbt);
             this.Controls.Add(this.Eliminarbt);
@@ -238,9 +260,10 @@ namespace Vista
             this.Controls.Add(this.Codigotxt);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ProductosForm";
             this.Text = "Productos";
+            this.Load += new System.EventHandler(this.ProductosForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ImagenPB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProductosDGV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
@@ -268,5 +291,7 @@ namespace Vista
         private System.Windows.Forms.Button Nuevobt;
         private System.Windows.Forms.DataGridView ProductosDGV;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.CheckBox EstaActivocheckBox;
+        private System.Windows.Forms.Label label6;
     }
 }

@@ -17,7 +17,7 @@ namespace Vista
         string tipoOperacion;
 
         DataTable dt = new DataTable();
-        UsuarioDB UsuarioDB = new UsuarioDB();
+        UsuarioDB usuarioDB = new UsuarioDB();
 
         Usuario user = new Usuario();
 
@@ -136,7 +136,7 @@ namespace Vista
 
                 //Insertar en la base de datos
 
-                bool inserto = UsuarioDB.Insertar(user);
+                bool inserto = usuarioDB.Insertar(user);
 
                 if (inserto)
                 {
@@ -169,7 +169,7 @@ namespace Vista
                     user.Foto = ms.GetBuffer();
                 }
 
-                bool modifico = UsuarioDB.Editar(user);
+                bool modifico = usuarioDB.Editar(user);
                 if (modifico)
                 {
                     LimpiarControles();
@@ -197,7 +197,7 @@ namespace Vista
                 RolCB.Text = UsuariosDGV.CurrentRow.Cells["Rol"].Value.ToString();
                 EstaActivocheckBox.Checked = Convert.ToBoolean(UsuariosDGV.CurrentRow.Cells["EstadoActivo"].Value);
 
-                byte[] miFoto = UsuarioDB.DevolverFoto(Codigotxt.Text = UsuariosDGV.CurrentRow.Cells["CodigoUsuario"].Value.ToString());
+                byte[] miFoto = usuarioDB.DevolverFoto(Codigotxt.Text = UsuariosDGV.CurrentRow.Cells["CodigoUsuario"].Value.ToString());
                 if (miFoto.Length > 0)
                 {
                     MemoryStream ms = new MemoryStream(miFoto);
@@ -231,7 +231,7 @@ namespace Vista
 
         private void TraerUsuarios()
         {
-            dt = UsuarioDB.DevolverUsuarios();
+            dt = usuarioDB.DevolverUsuarios();
             UsuariosDGV.DataSource = dt;
         }
 
@@ -243,7 +243,7 @@ namespace Vista
                 DialogResult resultado = MessageBox.Show("Esta seguro de eliminar el registro", "Advertencia", MessageBoxButtons.YesNo);
                 if (resultado == DialogResult.Yes)
                 {
-                    bool elimino = UsuarioDB.Eliminar(UsuariosDGV.CurrentRow.Cells["CodigoUsuario"].Value.ToString());
+                    bool elimino = usuarioDB.Eliminar(UsuariosDGV.CurrentRow.Cells["CodigoUsuario"].Value.ToString());
 
                     if (elimino)
                     {
