@@ -36,6 +36,7 @@ namespace Vista
             Cancelarbt.Enabled = true;
             Nuevobt.Enabled = false;
             Eliminarbt.Enabled = false;
+            EstaActivocheckBox.Enabled = true;
         }
 
         private void DeshabilitarControles()
@@ -49,6 +50,7 @@ namespace Vista
             Cancelarbt.Enabled = false;
             Nuevobt.Enabled = true;
             Eliminarbt.Enabled = true;
+            EstaActivocheckBox.Enabled = false;
         }
 
         private void LimpiarControles()
@@ -210,7 +212,7 @@ namespace Vista
                 e.Handled = true;
             }
 
-            if ((e.KeyChar == '.') && (sender as TextBox).Text.IndexOf('.') > -1)
+            if ((e.KeyChar == '.') && (sender as TextBox).Text.IndexOf('.') > -1 && e.KeyChar != '\b')
             {
                 e.Handled = true;
             }
