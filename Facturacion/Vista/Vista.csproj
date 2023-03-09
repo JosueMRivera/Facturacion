@@ -59,6 +59,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientesForm.Designer.cs">
+      <DependentUpon>ClientesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FacturaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FacturaForm.Designer.cs">
+      <DependentUpon>FacturaForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +97,12 @@
     <Compile Include="UsuariosForm.Designer.cs">
       <DependentUpon>UsuariosForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ClientesForm.resx">
+      <DependentUpon>ClientesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FacturaForm.resx">
+      <DependentUpon>FacturaForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -157,6 +175,18 @@
       <Project>{62543E81-23BF-449F-815C-4D1FADBBD869}</Project>
       <Name>Entidades</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\buscar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\buscar cliente.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\buscar cliente1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\guardar.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
