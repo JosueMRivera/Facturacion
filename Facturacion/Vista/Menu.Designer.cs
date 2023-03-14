@@ -79,7 +79,7 @@ namespace Vista
             this.ribbonControlAdv1.QuickPanelImageLayout = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ribbonControlAdv1.RibbonHeaderImage = Syncfusion.Windows.Forms.Tools.RibbonHeaderImage.None;
             this.ribbonControlAdv1.RibbonStyle = Syncfusion.Windows.Forms.Tools.RibbonStyle.Office2016;
-            this.ribbonControlAdv1.SelectedTab = this.toolStripTabItem2;
+            this.ribbonControlAdv1.SelectedTab = this.toolStripTabItem3;
             this.ribbonControlAdv1.ShowRibbonDisplayOptionButton = true;
             this.ribbonControlAdv1.Size = new System.Drawing.Size(800, 132);
             this.ribbonControlAdv1.SystemText.QuickAccessDialogDropDownName = "Start menu";
@@ -165,7 +165,7 @@ namespace Vista
             this.toolStripEx2.Office12Mode = false;
             this.toolStripEx2.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.toolStripEx2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripEx2.Size = new System.Drawing.Size(107, 66);
+            this.toolStripEx2.Size = new System.Drawing.Size(76, 66);
             this.toolStripEx2.TabIndex = 0;
             // 
             // ProductostoolStripButton
@@ -211,7 +211,7 @@ namespace Vista
             this.toolStripEx3.Office12Mode = false;
             this.toolStripEx3.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.toolStripEx3.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripEx3.Size = new System.Drawing.Size(64, 66);
+            this.toolStripEx3.Size = new System.Drawing.Size(95, 66);
             this.toolStripEx3.TabIndex = 0;
             // 
             // ClientestoolStripButton
@@ -225,6 +225,7 @@ namespace Vista
             this.ClientestoolStripButton.Size = new System.Drawing.Size(55, 49);
             this.ClientestoolStripButton.Text = "Clientes";
             this.ClientestoolStripButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.ClientestoolStripButton.Click += new System.EventHandler(this.ClientestoolStripButton_Click);
             // 
             // toolStripTabItem4
             // 
